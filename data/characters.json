@@ -1,0 +1,474 @@
+{
+  "characters": [
+    {
+      "char_code": "ADM",
+      "name": "Adam",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:2:1-25",
+        "Genesis:3:1-24"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Very high"
+    },
+    {
+      "char_code": "EVE",
+      "name": "Eve",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:2:1-25",
+        "Genesis:3:1-24"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Very high"
+    },
+    {
+      "char_code": "CAI",
+      "name": "Cain",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:4:1-26"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "HAG",
+      "name": "Hagar",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:16:1-16",
+        "Genesis:21:1-34"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "LOT-W",
+      "name": "Lot's wife",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:19:1-38"
+      ],
+      "char_type": "Minor, unnamed in text",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "LOT-D",
+      "name": "Lot's daughters",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:19:1-38"
+      ],
+      "char_type": "Minor, named, pair",
+      "reception_density": "Moderate"
+    },
+    {
+      "char_code": "ISA",
+      "name": "Isaac",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:22:1-24",
+        "Genesis:23:1-20",
+        "Genesis:24:1-67",
+        "Genesis:25:1-34",
+        "Genesis:26:1-35",
+        "Genesis:27:1-46"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Moderate"
+    },
+    {
+      "char_code": "REB",
+      "name": "Rebekah",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:24:1-67",
+        "Genesis:25:1-34",
+        "Genesis:26:1-35",
+        "Genesis:27:1-46"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Moderate-high"
+    },
+    {
+      "char_code": "RAC",
+      "name": "Rachel",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:29:1-35",
+        "Genesis:30:1-43",
+        "Genesis:31:1-55",
+        "Genesis:32:1-32",
+        "Genesis:33:1-20",
+        "Genesis:34:1-31",
+        "Genesis:35:1-29"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "LEA",
+      "name": "Leah",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:29:1-35",
+        "Genesis:30:1-43",
+        "Genesis:31:1-55",
+        "Genesis:32:1-32",
+        "Genesis:33:1-20",
+        "Genesis:34:1-31",
+        "Genesis:35:1-29"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Moderate-high"
+    },
+    {
+      "char_code": "ESA",
+      "name": "Esau",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:25:1-34",
+        "Genesis:26:1-35",
+        "Genesis:27:1-46",
+        "Genesis:28:1-22",
+        "Genesis:29:1-35",
+        "Genesis:30:1-43",
+        "Genesis:31:1-55",
+        "Genesis:32:1-32",
+        "Genesis:33:1-20"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "JAC",
+      "name": "Jacob",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:25:1-34",
+        "Genesis:26:1-35",
+        "Genesis:27:1-46",
+        "Genesis:28:1-22",
+        "Genesis:29:1-35",
+        "Genesis:30:1-43",
+        "Genesis:31:1-55",
+        "Genesis:32:1-32",
+        "Genesis:33:1-20",
+        "Genesis:34:1-31",
+        "Genesis:35:1-29"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Very high"
+    },
+    {
+      "char_code": "JUD",
+      "name": "Judah",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:38:1-30"
+      ],
+      "char_type": "Moderate, named",
+      "reception_density": "Moderate"
+    },
+    {
+      "char_code": "TAM-G",
+      "name": "Tamar",
+      "book": "Genesis",
+      "passages": [
+        "Genesis:38:1-30"
+      ],
+      "char_type": "Moderate, named",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "SHI-PUA",
+      "name": "Shiphrah & Puah",
+      "book": "Exodus",
+      "passages": [
+        "Exodus:1:1-22"
+      ],
+      "char_type": "Minor, named, pair",
+      "reception_density": "Moderate"
+    },
+    {
+      "char_code": "PHA-D",
+      "name": "Pharaoh's daughter",
+      "book": "Exodus",
+      "passages": [
+        "Exodus:2:1-25"
+      ],
+      "char_type": "Minor, unnamed",
+      "reception_density": "Moderate"
+    },
+    {
+      "char_code": "ZIP",
+      "name": "Zipporah",
+      "book": "Exodus",
+      "passages": [
+        "Exodus:2:1-25",
+        "Exodus:4:1-31"
+      ],
+      "char_type": "Minor, named",
+      "reception_density": "Moderate"
+    },
+    {
+      "char_code": "MIR",
+      "name": "Miriam",
+      "book": "Exodus/Numbers",
+      "passages": [
+        "Exodus:15:1-27",
+        "Numbers:12:1-16"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "ZEL-D",
+      "name": "Zelophehad's daughters",
+      "book": "Numbers",
+      "passages": [
+        "Numbers:27:1-23",
+        "Numbers:36:1-13"
+      ],
+      "char_type": "Minor, named, group",
+      "reception_density": "Moderate"
+    },
+    {
+      "char_code": "BAL",
+      "name": "Balaam",
+      "book": "Numbers",
+      "passages": [
+        "Numbers:22:1-41",
+        "Numbers:23:1-30",
+        "Numbers:24:1-25"
+      ],
+      "char_type": "Moderate, named",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "EHU",
+      "name": "Ehud",
+      "book": "Judges",
+      "passages": [
+        "Judges:3:1-31"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Moderate"
+    },
+    {
+      "char_code": "EGL",
+      "name": "Eglon",
+      "book": "Judges",
+      "passages": [
+        "Judges:3:1-31"
+      ],
+      "char_type": "Minor, named",
+      "reception_density": "Low"
+    },
+    {
+      "char_code": "DEB",
+      "name": "Deborah",
+      "book": "Judges",
+      "passages": [
+        "Judges:4:1-24",
+        "Judges:5:1-31"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Very high"
+    },
+    {
+      "char_code": "JAE",
+      "name": "Jael",
+      "book": "Judges",
+      "passages": [
+        "Judges:4:1-24",
+        "Judges:5:1-31"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Very high"
+    },
+    {
+      "char_code": "GID",
+      "name": "Gideon",
+      "book": "Judges",
+      "passages": [
+        "Judges:6:1-40",
+        "Judges:7:1-25",
+        "Judges:8:1-35"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Moderate-high"
+    },
+    {
+      "char_code": "ABI",
+      "name": "Abimelech",
+      "book": "Judges",
+      "passages": [
+        "Judges:9:1-57"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Moderate"
+    },
+    {
+      "char_code": "JEP",
+      "name": "Jephthah",
+      "book": "Judges",
+      "passages": [
+        "Judges:11:1-40",
+        "Judges:12:1-15"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "JEP-D",
+      "name": "Jephthah's daughter",
+      "book": "Judges",
+      "passages": [
+        "Judges:11:1-40"
+      ],
+      "char_type": "Minor, unnamed",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "MAN-W",
+      "name": "Woman of Manoah",
+      "book": "Judges",
+      "passages": [
+        "Judges:13:1-25"
+      ],
+      "char_type": "Minor, unnamed",
+      "reception_density": "Low-moderate"
+    },
+    {
+      "char_code": "MAN",
+      "name": "Manoah",
+      "book": "Judges",
+      "passages": [
+        "Judges:13:1-25"
+      ],
+      "char_type": "Minor, named",
+      "reception_density": "Low"
+    },
+    {
+      "char_code": "SAM",
+      "name": "Samson",
+      "book": "Judges",
+      "passages": [
+        "Judges:13:1-25",
+        "Judges:14:1-20",
+        "Judges:15:1-20",
+        "Judges:16:1-31"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Very high"
+    },
+    {
+      "char_code": "TIM-W",
+      "name": "Woman in Timnah",
+      "book": "Judges",
+      "passages": [
+        "Judges:14:1-20"
+      ],
+      "char_type": "Minor, unnamed",
+      "reception_density": "Low"
+    },
+    {
+      "char_code": "ZON",
+      "name": "The Zonah, Gaza",
+      "book": "Judges",
+      "passages": [
+        "Judges:16:1-1"
+      ],
+      "char_type": "Minor, unnamed",
+      "reception_density": "Very low"
+    },
+    {
+      "char_code": "DEL",
+      "name": "Delilah",
+      "book": "Judges",
+      "passages": [
+        "Judges:16:1-31"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Very high"
+    },
+    {
+      "char_code": "PIL",
+      "name": "The Pilegesh",
+      "book": "Judges",
+      "passages": [
+        "Judges:19:1-30",
+        "Judges:20:1-48",
+        "Judges:21:1-25"
+      ],
+      "char_type": "Minor, unnamed",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "HAN",
+      "name": "Hannah",
+      "book": "1-2 Samuel",
+      "passages": [
+        "1_Samuel:1:1-28",
+        "1_Samuel:2:1-36"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "MCH",
+      "name": "Michal",
+      "book": "1-2 Samuel",
+      "passages": [
+        "1_Samuel:18:1-30",
+        "1_Samuel:19:1-24",
+        "2_Samuel:6:1-23"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "ABG",
+      "name": "Abigail",
+      "book": "1-2 Samuel",
+      "passages": [
+        "1_Samuel:25:1-44"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "High"
+    },
+    {
+      "char_code": "END",
+      "name": "Medium at Endor",
+      "book": "1-2 Samuel",
+      "passages": [
+        "1_Samuel:28:1-25"
+      ],
+      "char_type": "Minor, unnamed",
+      "reception_density": "Moderate"
+    },
+    {
+      "char_code": "BAT",
+      "name": "Bathsheba",
+      "book": "1-2 Samuel",
+      "passages": [
+        "2_Samuel:11:1-27",
+        "2_Samuel:12:1-31"
+      ],
+      "char_type": "Major, named",
+      "reception_density": "Very high"
+    },
+    {
+      "char_code": "TAM-S",
+      "name": "Tamar (2 Sam)",
+      "book": "1-2 Samuel",
+      "passages": [
+        "2_Samuel:13:1-39"
+      ],
+      "char_type": "Moderate, named",
+      "reception_density": "High"
+    }
+  ]
+}
