@@ -8,6 +8,7 @@ import { useMemo } from "react";
 import Dropdown from "./components/Dropdown";
 import HighlightText from "./components/HighlightText";
 import BHSAPassage from "./components/BHSAPassage";
+import ResponseUtility from "./components/ResponseUtility";
 
 export default function Panel() {
   const { runId, characterId } = useParams();
@@ -64,6 +65,7 @@ export default function Panel() {
                       text={response.raw_output}
                       color="#f19837"
                     />
+                    <ResponseUtility response={response} />
                   </Dropdown>
                 ))}
               </div>
@@ -84,6 +86,7 @@ export default function Panel() {
                       text={response.raw_output}
                       color="#B3E561"
                     />
+                    <ResponseUtility response={response} />
                   </Dropdown>
                 ))}
               </div>

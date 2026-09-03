@@ -13,7 +13,6 @@ import BasicButton from "./components/BasicButton";
 export default function Landing() {
   const navigate = useNavigate();
   const { runId, characterId } = useParams();
-  console.log("params: ", runId, characterId);
 
   const { runs } = useHolos();
   const currentRun = runs.find((run) => run.run_id == runId);

@@ -1,8 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
 import { response } from './format'
+import { getOutputId } from './query'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
+const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 
 const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {
@@ -158,4 +159,36 @@ export const incrementRun = async () => {
   }
 
   return data?.run;
+}
+
+export const updateResponseWithNewClaudeResponse = async (prompt, model, run, index, responseId, newClaudeResponse) => {
+  const characterId = await getCharacterIdFromCharCode(prompt.charCode);
+  const update = {
+    output_id: getOutputId(prompt, model, run),
+    phase: prompt.phase,
+    run: run,
+    loop_index: index,
+    model: model,
+    character_id: characterId,
+    raw_output: newClaudeResponse?.content?.reduce((acc, curr) => acc + (curr?.text || ""), ""),
+    prompt_id: prompt.promptCode,
+
+    input_tokens: newClaudeResponse?.usage?.input_tokens || 0,
+    output_tokens: newClaudeResponse?.usage?.output_tokens || 0,
+    cache_creation_input_tokens: newClaudeResponse?.usage?.cache_creation_input_tokens || 0,
+    cache_read_input_tokens: newClaudeResponse?.usage?.cache_read_input_tokens || 0,
+
+    stop_reason: newClaudeResponse?.stop_reason || null,
+  }
+  const { error } = await supabase
+    .from('response')
+    .update(update)
+    .eq('response_id', responseId)
+
+  if (error) {
+    console.error('Error updating response:', error);
+    return null;
+  }
+
+  return { update, error };
 }

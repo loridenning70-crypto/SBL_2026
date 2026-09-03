@@ -22,6 +22,10 @@ body {
   transition: background-color 0.1s ease;
 }
 
+.bg-expand {
+  transition: transform 0.1s ease;
+}
+
 .bg-expand:hover {
   cursor: pointer;
   transform: scale(1.2);
@@ -34,6 +38,53 @@ body {
 .bg-opacity:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.dispatch-response-list {
+  --dispatch-row-gap: 16px;
+  position: relative;
+  padding-left: 26px;
+}
+
+.dispatch-response-row {
+  position: relative;
+  align-items: center;
+}
+
+.dispatch-response-row::after {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: calc(var(--dispatch-row-gap) / -2);
+  bottom: calc(var(--dispatch-row-gap) / -2);
+  width: 2px;
+  background-color: var(--border);
+}
+
+.dispatch-response-row:first-child::after {
+  top: 50%;
+}
+
+.dispatch-response-row:last-child::after {
+  bottom: 50%;
+}
+
+.dispatch-response-row::before {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-left: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+  border-bottom-left-radius: 12px;
+  transform: translateY(-50%);
 }
 
 @keyframes spin {

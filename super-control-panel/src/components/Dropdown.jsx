@@ -32,6 +32,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '8px',
+    width: '100%',
 
     background: 'none',
     border: 'none',
@@ -66,7 +67,10 @@ const styles = {
     paddingLeft: '20px',
   },
   label: {
+    display: 'flex',
+    flex: 1,
     fontWeight: 'bold',
     color: colors.primary,
+    textAlign: 'left',
   },
 }

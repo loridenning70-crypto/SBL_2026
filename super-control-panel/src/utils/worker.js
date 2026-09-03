@@ -1,6 +1,6 @@
 import { getCharacterIdFromCharCode, getCurrentRun, postResponses } from "./supabase";
 import { sendQueryToClaude } from "./claude";
-import { getModelCode, nominal } from "./query";
+import { getModelCode, getOutputId, nominal } from "./query";
 
 const RESPONSES_PER_PROMPT = 5;
 
@@ -37,11 +37,18 @@ export const processPrompt = async (prompt, model) => {
 }
 
 const isValid = (response) => {
-  return (
-    response &&
-    response.content &&
-    response.content.length > 0
-  );
+  try {
+    if (response?.content) { 
+      const consolidated = response.content.reduce((acc, curr) => acc + (curr?.text || ""), "");
+      if (consolidated.trim() !== "" && consolidated.length > 0) {
+        return true;
+      }
+    }
+    return false;
+  } catch (error) {
+    console.error("isValid functions broke", error);
+    return false;
+  }
 }
 
 const PROMPT_CONCURRENCY = 5;
@@ -69,15 +76,11 @@ export const worker = async (prompts, run, model, onCompleteJob, onFailJob) => {
       output_tokens: response?.usage?.output_tokens || 0,
       cache_creation_input_tokens: response?.usage?.cache_creation_input_tokens || 0,
       cache_read_input_tokens: response?.usage?.cache_read_input_tokens || 0,
+
+      stop_reason: response?.stop_reason || null,
     })));
 
     if (onCompleteJob) onCompleteJob(responses);
     if (onFailJob && responses.length < RESPONSES_PER_PROMPT) onFailJob(prompt.charCode, `Failed to generate ${RESPONSES_PER_PROMPT} responses for prompt ${prompt.promptCode}. Only generated ${responses.length} responses.`);
   }
-}
-
-const getOutputId = (prompt, model, run) => {
-  // [CHAR_CODE]-[MODEL]-[PROMPT_TYPE]-[RUN]
-  const modelCode = getModelCode(model);
-  return `${prompt.charCode}_${modelCode}_${nominal[prompt.phase].min}_${run}`;
 }

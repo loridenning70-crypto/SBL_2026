@@ -1,3 +1,6 @@
+import characters from "../data/characters.json";
+import passages from "../data/passages.json";
+
 export const generate = (
   prompt,
   character,
@@ -66,4 +69,35 @@ export const getModelCode = (model) => {
   } else {
     return "UNK"; // Unknown
   }
+}
+
+const getRefinedPassagesOfCharacter = (charCode) => {
+  const refined = JSON.stringify(passages[charCode] || []).replace(/\s+/g, "");
+  return refined;
+}
+
+export const retrieveValidPrompts = (chars, phase, promptCode) => {
+  const prompts = [];
+  for (const charCode of chars) {
+    const passages = getRefinedPassagesOfCharacter(charCode);
+    const character = characters.characters.find((char) => char.char_code === charCode);
+    const query = generate(promptCode, character.name, passages);
+
+    if (query && query.length > 0) {
+      prompts.push({
+        query,
+        charCode,
+        phase,
+        promptCode,
+      });
+    }
+  }
+  return prompts;
+}
+
+
+export const getOutputId = (prompt, model, run) => {
+  // [CHAR_CODE]-[MODEL]-[PROMPT_TYPE]-[RUN]
+  const modelCode = getModelCode(model);
+  return `${prompt.charCode}_${modelCode}_${nominal[prompt.phase].min}_${run}`;
 }

@@ -1,23 +1,25 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import characters from "./data/characters.json";
-import passages from "./data/passages.json";
 
+import DispatchCharacterDropdown from './components/DispatchCharacterDropdown';
 import BasicButton from './components/BasicButton'
+import Dropdown from './components/Dropdown';
 
-import { calculatePrice, sendQueryToClaude } from './utils/claude';
-import { generate, nominal } from './utils/query';
-import { incrementRun } from './utils/supabase';
-import { worker } from './utils/worker';
-import { formatPrice } from './utils/format';
 import { useDispatch } from './context/DispatchProvider';
-import { useParams } from 'react-router-dom';
-import { colors } from './utils/colors';
 import { useHolos } from './context/HolosProvider';
+
+import { retrieveValidPrompts } from './utils/query';
+import { calculatePrice } from './utils/claude';
+import { incrementRun } from './utils/supabase';
+import { formatPrice } from './utils/format';
+import { useParams } from 'react-router-dom';
+import { worker } from './utils/worker';
+import { colors } from './utils/colors';
 
 export default function Dispatch() {
   const { runId } = useParams();
-  const { runs, setRuns } = useHolos();
+  const { runs } = useHolos();
   const { dispatch, setDispatch } = useDispatch();
   const currentRun = useMemo(() => runs.find((run) => run.run_id == runId) , [runs, runId]);
 
@@ -59,37 +61,13 @@ export default function Dispatch() {
       const focus = dispatch[`${promptCode}`] || [];
       tokenReview(focus);
       setDisplay(focus.reduce((acc, response) => {
-        if (response.character_id?.char_code && !acc.includes(response.character_id.char_code)) {
+        if (response.character_id?.char_code && response.raw_output !== "") {
           acc.push(response.character_id.char_code);
         }
         return acc;
       }, []) || []);
     }
   }, [dispatch, promptCode]);
-
-  const getRefinedPassagesOfCharacter = (charCode) => {
-    const refined = JSON.stringify(passages[charCode] || []).replace(/\s+/g, "");
-    return refined;
-  }
-  
-  const retrieveValidPrompts = () => {
-    const prompts = [];
-    for (const charCode of chars) {
-      const passages = getRefinedPassagesOfCharacter(charCode);
-      const character = characters.characters.find((char) => char.char_code === charCode);
-      const query = generate(promptCode, character.name, passages);
-
-      if (query && query.length > 0) {
-        prompts.push({
-          query,
-          charCode,
-          phase,
-          promptCode,
-        });
-      }
-    }
-    return prompts;
-  }
 
   const onCompleteJob = (responses) => {
     setDispatch((prev) => {
@@ -165,7 +143,7 @@ export default function Dispatch() {
     // TEMPORARY - increment run only for prompt 1
     if (promptCode === 1) await incrementRun();
 
-    const prompts = retrieveValidPrompts();
+    const prompts = retrieveValidPrompts(chars, phase, promptCode);
     // console.log(prompts)
     await Promise.all(
       Array.from({ length: PROMPT_CONCURRENCY }, () => worker(prompts, runId, model, onCompleteJob, onFailJob))
@@ -212,7 +190,7 @@ export default function Dispatch() {
             )}
             <div style={styles.runInformation}>
               <div style={styles.infoLeft}>
-                <p style={styles.infoText}>{display.length} / {characters.characters.length} complete</p>
+                <p style={styles.infoText}>{display.length/5} / {characters.characters.length} complete</p>
                 <p style={styles.infoText}>{(dispatch[`${promptCode}`] || []).length} / {characters.characters.length*5} prompts made</p>
                 <p style={styles.infoText}>expended: {formatPrice(expended)}</p> 
               </div>
@@ -226,17 +204,33 @@ export default function Dispatch() {
           </div>
           <div style={styles.completedList}>
             {characters.characters.map((char) => (
-              <div key={char.char_code} style={styles.completedItem}>
-                <span style={styles.statusCell}>{
-                  display.includes(char.char_code) 
-                    ? "✅" 
-                    : failed.includes(char.char_code)
-                      ? "❌" 
-                      : "💤"
-                  }</span>
-                <span style={styles.nameCell}>{char.name}</span>
-                <span style={styles.usageCell}>usage: {formatPrice(usage[char.char_code]?.totalPrice ?? 0)}</span>
-              </div>
+              <Dropdown 
+                key={char.char_code}
+                label={
+                  <div key={char.char_code} style={styles.completedItem}>
+                    <span style={styles.statusCell}>{
+                      display.includes(char.char_code) 
+                        ? display.filter((code) => code === char.char_code).length === 5
+                          // ? `✅ ${display.filter((code) => code === char.char_code).length}/5` 
+                          // : `🟡 ${display.filter((code) => code === char.char_code).length}/5`
+                          ? "✅"
+                          : "🟡"
+                        : failed.includes(char.char_code)
+                          ? "❌" 
+                          : "💤"
+                      }</span>
+                    <span style={styles.nameCell}>{char.name}</span>
+                    <span style={styles.usageCell}>usage: {formatPrice(usage[char.char_code]?.totalPrice ?? 0)}</span>
+                  </div>
+                }
+                children={
+                  <DispatchCharacterDropdown
+                    char_code={char.char_code}
+                    promptCode={promptCode}
+                    // responses={dispatch[`${promptCode}`]?.filter((response) => response.character_id?.char_code === char.char_code) || []}
+                  />
+                }
+              />
             ))}
           </div>
         </div>
@@ -348,22 +342,22 @@ const styles = {
     alignItems: 'center',
     gap: 10,
     width: '100%',
-    maxWidth: 900,
     borderRadius: 8,
   },
   statusCell: {
-    width: 44,
-    minWidth: 44,
     textAlign: 'center',
+
+    color: colors.secondary,
   },
   nameCell: {
+    display: 'flex',
     flex: 1,
-    minWidth: 220,
+    minWidth: 0,
+    textAlign: 'left',
   },
   usageCell: {
-    width: 220,
     minWidth: 220,
-    textAlign: 'right',
+    textAlign: 'left',
     whiteSpace: 'nowrap',
   }
 }

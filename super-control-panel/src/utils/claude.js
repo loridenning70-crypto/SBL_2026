@@ -6,16 +6,16 @@ const client = new Anthropic({
 });
 
 export const sendQueryToClaude = async (query, model) => {
+  console.log("PARAMS: ", query, model);
   const msg = await client.messages.create({
     model,
-    max_tokens: 1024,
+    max_tokens: 3096,
     messages: [{
       role: "user",
       content: query
     }],
   });
   console.log(msg.usage);
-
   return msg;
 }
 
