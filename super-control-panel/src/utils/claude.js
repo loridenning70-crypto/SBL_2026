@@ -9,7 +9,7 @@ export const sendQueryToClaude = async (query, model) => {
   console.log("PARAMS: ", query, model);
   const msg = await client.messages.create({
     model,
-    max_tokens: 3096,
+    max_tokens: 10000,
     messages: [{
       role: "user",
       content: query

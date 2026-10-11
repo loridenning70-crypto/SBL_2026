@@ -6,11 +6,14 @@ import { retrieveValidPrompts } from "../utils/query";
 
 import { useDispatch } from "../context/DispatchProvider";
 import { updateResponseWithNewClaudeResponse } from "../utils/supabase";
+import { worker } from "../utils/worker";
 
-export default function DispatchCharacterDropdown({ char_code, promptCode }) {
+export default function DispatchCharacterDropdown({ char_code, phase, promptCode, runId, model }) {
   const { dispatch, setDispatch } = useDispatch();
 
   const [loading, setLoading] = useState([]);
+  const [running, setRunning] = useState(false);
+
   const responses = useMemo(() => {
     return dispatch[`${promptCode}`]?.filter((response) => response.character_id?.char_code === char_code) || [];
   }, [dispatch, char_code, promptCode]);
@@ -44,6 +47,30 @@ export default function DispatchCharacterDropdown({ char_code, promptCode }) {
     setLoading((prevLoading) => prevLoading.filter((id) => id !== responseId));
   }
 
+  const handleRunOneCharacter = async () => {
+    if (running) return;
+    setRunning(true);
+    const prompts = retrieveValidPrompts([char_code], phase, promptCode);
+    await worker(prompts, runId, model, (responses) => {
+      setDispatch((prev) => {
+        const next = { ...(prev || {}) };
+
+        for (const response of responses) {
+          const promptId = response?.prompt_id?.prompt_id;
+          if (!promptId) continue;
+
+          const existing = next[promptId] || [];
+          next[promptId] = [...existing, response];
+        }
+
+        return next;
+      });
+    }, () => {
+      alert('Failed to run the job for this character. Try refreshing the page then trying again.');
+    });
+    setRunning(false);
+  }
+
   return (
     <div className="dispatch-response-list" style={styles.container}>
       {responses.map((response) => (
@@ -69,8 +96,20 @@ export default function DispatchCharacterDropdown({ char_code, promptCode }) {
         </div>
       ))}
       {responses.length === 0 && (
-        <span style={styles.responseText}>No responses for this character.</span>
+        <div style={{
+          ...styles.responseRowContent,
+          opacity: running ? 0.2 : 1,
+        }}>
+          <div 
+            style={styles.responseRowActions}
+            onClick={handleRunOneCharacter}
+          >
+            <span className='bg-expand'>🚀</span>
+          </div>
+          <span style={styles.responseText}>No responses ... yet. Press the rocket to run!</span>
+        </div>
       )}
+        {/* <span style={styles.responseText}>No responses for this character.</span> */}
     </div>
   )
 }

@@ -31,7 +31,7 @@ export default function BHSAPassage({ charCode }) {
 
           return acc;
         }, {});
-        console.log("Refined Hebrew passages:", refinedHebrew);
+        // console.log("Refined Hebrew passages:", refinedHebrew);
         setPassage(refinedHebrew);
       }
     }

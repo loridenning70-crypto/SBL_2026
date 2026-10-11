@@ -226,7 +226,11 @@ export default function Dispatch() {
                 children={
                   <DispatchCharacterDropdown
                     char_code={char.char_code}
+                    phase={phase}
                     promptCode={promptCode}
+
+                    runId={runId}
+                    model={model}
                     // responses={dispatch[`${promptCode}`]?.filter((response) => response.character_id?.char_code === char.char_code) || []}
                   />
                 }

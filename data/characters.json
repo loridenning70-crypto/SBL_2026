@@ -469,6 +469,47 @@
       ],
       "char_type": "Moderate, named",
       "reception_density": "High"
+    },
+    {
+      "char_code": "LEV",
+      "name": "The Levite",
+      "book": "Judges",
+      "passages": [
+        "Judges:19:1-30",
+        "Judges:20:1-7"
+      ],
+      "char_type": "Moderate, unnamed",
+      "reception_density": "Low"
+    },
+    {
+      "char_code": "AMK",
+      "name": "The Amalekite messenger",
+      "book": "1-2 Samuel",
+      "passages": [
+        "2_Samuel:1:1-16"
+      ],
+      "char_type": "Minor, unnamed",
+      "reception_density": "Low"
+    },
+    {
+      "char_code": "MOG",
+      "name": "The man of God who confronts Eli",
+      "book": "1-2 Samuel",
+      "passages": [
+        "1_Samuel:2:27-36"
+      ],
+      "char_type": "Minor, unnamed",
+      "reception_density": "Low"
+    },
+    {
+      "char_code": "ABI-AB",
+      "name": "Abimelech's armor-bearer",
+      "book": "Judges",
+      "passages": [
+        "Judges:9:50-57"
+      ],
+      "char_type": "Minor, unnamed",
+      "reception_density": "Low"
     }
   ]
 }

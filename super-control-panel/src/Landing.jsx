@@ -7,7 +7,7 @@ import { colors } from "./utils/colors";
 import { useHolos } from "./context/HolosProvider";
 import { convertTimestamp } from "./utils/format";
 
-import characters from "../../data/characters.json";
+import characters from "./data/characters.json";
 import BasicButton from "./components/BasicButton";
 
 export default function Landing() {
