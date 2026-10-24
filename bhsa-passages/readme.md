@@ -21,10 +21,10 @@ y = tokens consumed by prompt
 t = ppt (price per token)
 q = ty
 
-Cached cost: (t = 0.1)
-1.25q + qx = $
+Cached cost:
+1.25q + 0.1q(x − 1) = 1.15q + 0.1qx = $
 
-Uncached cost: (t = 1)
+Uncached cost:
 qx = $
 
 Genesis 1 - Possible pricing demonstration
@@ -33,7 +33,7 @@ Genesis 1 - Possible pricing demonstration
 - Remove White Space        => tokens: 32,343 | uncached: $0.097 | cached: $0.0097
 - Efficient Naming          => tokens: 30,261 | uncached: $0.090 | cached: $0.00907
 
-- Total Tokens Saved: 26,580 (47%)
+- Total Tokens Saved: 24,498 (43%)
 - Total Money Saved:  $0.16093 (94.66%)
 - Cost For Query:     $.17 * 1230 = $209 ===> $.00907 * 1230 = $11.15
 
