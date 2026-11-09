@@ -4,13 +4,14 @@ import passages from "../data/passages.json";
 export const generate = (
   prompt,
   character,
-  passage
+  passage,
+  useEphemeral
 ) => {
   switch (prompt) {
     case 1:
       return prompt1(character, passage);
     case 2:
-      return prompt2(character, passage);
+      return prompt2(character, passage, useEphemeral);
     case 3:
       return prompt3(character, passage);
     default:
@@ -25,16 +26,17 @@ export const prompt1 = (
 export const prompt2 = (
   character,
   passage,
+  useEphemeral=true
 ) => [
   {
     "type": "text",
     "text": "Based only on the passage below, what actions are attributed to the character? Do not infer motivations unless explicitly stated. If the text leaves something unstated, note the gap but do not fill it. Answer in 2-3 paragraphs. OMIT FORMATTING. ONLY RETURN TEXT. #Json property naming conventions - f: reference - h: hebrew - w: words - s: surface - g: gloss - m: morphology - p: Part of Speech - o: Part of Speech (display/predicate category) - v: Verbal Stem (Binyan, etc) - t: Verb Tense / Conjugation - d: Gender m f c (common) - n: Number (sg,du,pl) - r: person (1,2,3) - a: state (absolute,construct,determined)",
-    "cache_control": {"type": "ephemeral"}
+    "cache_control": {"type": useEphemeral ? "ephemeral" : "none"}
   },
   {
     "type": "text",
     "text": `character: ${character}, passage: ${passage}`,
-    "cache_control": {"type": "ephemeral"}
+    "cache_control": {"type": useEphemeral ? "ephemeral" : "none"}
   },
 ]
 
@@ -76,12 +78,12 @@ const getRefinedPassagesOfCharacter = (charCode) => {
   return refined;
 }
 
-export const retrieveValidPrompts = (chars, phase, promptCode) => {
+export const retrieveValidPrompts = (chars, phase, promptCode, useEphemeral=true) => {
   const prompts = [];
   for (const charCode of chars) {
     const passages = getRefinedPassagesOfCharacter(charCode);
     const character = characters.characters.find((char) => char.char_code === charCode);
-    const query = generate(promptCode, character.name, passages);
+    const query = generate(promptCode, character.name, passages, useEphemeral);
 
     if (query && query.length > 0) {
       prompts.push({

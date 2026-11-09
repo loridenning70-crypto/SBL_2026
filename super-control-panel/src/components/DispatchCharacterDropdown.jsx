@@ -24,7 +24,7 @@ export default function DispatchCharacterDropdown({ char_code, phase, promptCode
 
     // get prompt from responseId
     const response = responses.find((resp) => resp.response_id === responseId);
-    const prompt = retrieveValidPrompts([response.character_id.char_code], response.phase, response.prompt_id.prompt_id)[0];
+    const prompt = retrieveValidPrompts([response.character_id.char_code], response.phase, response.prompt_id.prompt_id, false)[0];
 
     // send api req to claude
     // TODO: Remove the model each response. Get that info from the run instead.
@@ -50,7 +50,7 @@ export default function DispatchCharacterDropdown({ char_code, phase, promptCode
   const handleRunOneCharacter = async () => {
     if (running) return;
     setRunning(true);
-    const prompts = retrieveValidPrompts([char_code], phase, promptCode);
+    const prompts = retrieveValidPrompts([char_code], phase, promptCode, true);
     await worker(prompts, runId, model, (responses) => {
       setDispatch((prev) => {
         const next = { ...(prev || {}) };
